@@ -1,23 +1,645 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://www.car-analysis-guide.co.kr/#service",
+        "name": "카니발 11인승 장기렌트카 및 자동차리스 비교 견적 서비스",
+        "provider": {
+          "@type": "Organization",
+          "name": "카니발 리스렌트 비교견적 센터",
+          "url": "https://www.car-analysis-guide.co.kr"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "KR"
+        },
+        "description": "2026년 최신 기준 카니발 11인승 모델의 연간 유지비, 세금 혜택, 110km/h 속도 제한 규정과 자동차리스 및 장기렌트카 견적 비교 분석 정보를 상세히 안내합니다."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.car-analysis-guide.co.kr/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "카니발 11인승의 연간 자동차세는 얼마인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "카니발 11인승은 한국 자동차세법상 승합차로 분류되어 연간 자동차세가 약 65000원으로 매우 저렴합니다. 이는 일반 승용차 기준인 9인승 이하 모델 대비 뛰어난 세금 절감 효과를 자랑합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "카니발 11인승의 속도 제한 규정은 무엇인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "대한민국 도로교통법 및 자동차 안전기준에 따라 11인승 이상 승합차량은 시속 110킬로미터 속도 제한 장치가 의무적으로 장착되어 출고됩니다. 따라서 고속도로 주행 시 최고 속도가 제한됩니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "장기렌트와 리스의 주요 차이점은 무엇인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "장기렌트카는 렌트사 명의의 하, 허, 호 번호판을 사용하며 이용료에 자동차세와 보험료가 모두 포함되어 있습니다. 반면 자동차리스는 일반 번호판을 사용하며 개인의 보험 경력이 유지되지만 보험료를 별도로 납부해야 하는 차이가 있습니다."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body { 
+      font-family: 'Segoe UI', Apple SD Gothic Neo, Malgun Gothic, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      line-height: 1.8; 
+      color: #334155; 
+      background-color: #f8fafc;
+    }
+    header { 
+      background: linear-gradient(135deg, #0f766e, #0369a1); 
+      color: #ffffff; 
+      padding: 60px 20px; 
+      text-align: center; 
+    }
+    header h1 { 
+      font-size: 2.5rem; 
+      margin-bottom: 15px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+    header p { 
+      font-size: 1.2rem; 
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      opacity: 0.9;
+    }
+    .cta-btn { 
+      background: #f97316; 
+      padding: 15px 35px; 
+      color: #ffffff; 
+      text-decoration: none; 
+      font-weight: bold; 
+      border-radius: 30px; 
+      display: inline-block; 
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+      transition: all 0.3s ease;
+    }
+    .cta-btn:hover {
+      background: #ea580c;
+      transform: translateY(-2px);
+    }
+    nav {
+      margin-top: 25px;
+    }
+    nav a { 
+      margin: 0 15px; 
+      color: #e2e8f0; 
+      text-decoration: none; 
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    section { 
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px; 
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    h2 { 
+      font-size: 1.8rem; 
+      color: #0f172a;
+      border-left: 5px solid #0f766e;
+      padding-left: 15px;
+      margin-bottom: 25px; 
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 30px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #f8fafc;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card {
+      background: #f8fafc;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="number"], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      color: #334155;
+      background-color: #ffffff;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #0f766e;
+    }
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      cursor: pointer;
+    }
+    .checkbox-label input {
+      margin-right: 8px;
+    }
+    button.submit-btn {
+      background-color: #0f766e;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+    button.submit-btn:hover {
+      background-color: #0d9488;
+    }
+    .calculator-box {
+      background-color: #f0fdfa;
+      border: 2px solid #ccfbf1;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 30px;
+    }
+    .calc-result {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f766e;
+      text-align: center;
+      margin-top: 20px;
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #14b8a6;
+    }
+    .link-section {
+      background-color: #f1f5f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    .link-section a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 500;
+      margin-right: 20px;
+      display: inline-block;
+    }
+    .link-section a:hover {
+      text-decoration: underline;
+    }
+    footer { 
+      background: #0f172a; 
+      color: #94a3b8;
+      text-align: center; 
+      padding: 40px 20px; 
+      font-size: 0.9rem; 
+      border-top: 1px solid #1e293b;
+    }
+    footer p {
+      text-align: center;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>카니발 11인승 유지비 및 자동차리스 장기렌트카 정밀 분석</h1>
+    <p>2026년 최신 제도를 반영한 카니발 11인승 연간 비용 시뮬레이션 및 맞춤형 금융 상품 비교 리포트</p>
+    <a href="#quote-form" class="cta-btn">실시간 최저가 견적 신청</a>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <a href="#guide-intro">시장 동향</a>
+      <a href="#guide-cost">유지비 정밀 분석</a>
+      <a href="#guide-comparison">리스 vs 장기렌트</a>
+      <a href="#guide-models">트림별 사양 정보</a>
+      <a href="#guide-keywords">검색 트렌드</a>
+      <a href="#calculator">모의 계산기</a>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    
+    <section id="guide-intro">
+      <h2>2026년 카니발 11인승 시장 동향 및 법적 지위</h2>
+      <p>
+        기아자동차의 대표 미니밴인 카니발은 다인원 수송 및 패밀리카 시장에서 압도적인 점유율을 기록하고 있습니다. 특히 카니발 11인승 모델은 세제 혜택과 다목적 활용성이라는 뚜렷한 가치 덕분에 개인사업자와 법인 기업 등 전문 비즈니스 용도로 꾸준한 추천을 받아왔습니다. 2026년 현재 자동차 시장의 친환경 패러다임 전환과 맞물려 카니발 하이브리드 세그먼트의 선호도가 급증하는 한편 기존 디젤 및 가솔린 모델에 대한 실용적 접근도 여전히 유효합니다.
+      </p>
+      <p>
+        대한민국 도로교통법상 카니발 11인승 모델은 일반 승용차가 아닌 승합차로 분류됩니다. 이로 인하여 발생하는 대표적인 법리적 특징은 시속 110킬로미터 제한 장치의 의무 부착입니다. 과거 속도 무제한 주행에 익숙한 소비자들에게 이는 주요한 고려 요소가 될 수 있으나 패밀리카로서의 안전성과 경제성을 최우선으로 여기는 운전자들에게는 오히려 안정감을 주는 요소로 작용하기도 합니다. 아울러 9인승 모델과 마찬가지로 고속도로 버스전용차로 진입 요건인 6인 이상 탑승 조건을 충족할 경우 정체 구간을 우회하여 신속한 이동을 보장받을 수 있는 장점이 있습니다. 다만 운전 조건에 있어 2종 보통 면허가 아닌 1종 보통 이상의 면허 소지자만 운전이 가능하다는 점을 사전 파악해 두어야 불필요한 행정적 혼선이 발생하지 않습니다.
+      </p>
+    </section>
+
+    <section id="guide-cost">
+      <h2>카니발 11인승 엔진 타입별 연간 유지비 정밀 분석</h2>
+      <p>
+        차량을 구매하거나 장기 렌트 및 리스 계약 시 매월 납입하는 금액 외에도 연간 고정적으로 발생하는 예상 세금과 유류비 및 소모품 교환 비용을 합산한 총 유지비를 꼼꼼히 산출하는 작업이 선행되어야 합니다. 카니발 11인승 모델은 승합차 세제가 적용되어 일반 승용차 대비 세금 면에서 파격적인 혜택을 누릴 수 있습니다.
+      </p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>구분 항목</th>
+              <th>스마트스트림 G3.5 가솔린 11인승</th>
+              <th>디젤 D2.2 11인승</th>
+              <th>스마트스트림 G1.6 T-HEV 하이브리드 9인승 (비교군)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>배기량</td>
+              <td>3470 cc</td>
+              <td>2151 cc</td>
+              <td>1598 cc</td>
+            </tr>
+            <tr>
+              <td>연간 자동차세</td>
+              <td>약 65000 원 (승합 기준)</td>
+              <td>약 65000 원 (승합 기준)</td>
+              <td>약 290000 원 (승용 승용세율 적용)</td>
+            </tr>
+            <tr>
+              <td>복합 연비</td>
+              <td>리터당 약 9.0 킬로미터</td>
+              <td>리터당 약 12.5 킬로미터</td>
+              <td>리터당 약 13.5 ~ 14.0 킬로미터</td>
+            </tr>
+            <tr>
+              <td>연간 유류비 (2만km 기준)</td>
+              <td>약 3500000 원</td>
+              <td>약 2500000 원</td>
+              <td>약 2200000 원</td>
+            </tr>
+            <tr>
+              <td>정기 검사 주기</td>
+              <td>매 1년 주기 (6년 초과 시 6개월)</td>
+              <td>매 1년 주기 (6년 초과 시 6개월)</td>
+              <td>신차 후 4년 이후 2년 주기</td>
+            </tr>
+            <tr>
+              <td>종합 보험료 평균</td>
+              <td>약 900000 원 ~ 1300000 원</td>
+              <td>약 900000 원 ~ 1300000 원</td>
+              <td>약 700000 원 ~ 1000000 원</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        위 표에서 보듯이 11인승 모델은 배기량에 관계없이 연간 세금이 약 65000원 선으로 묶여 있어 가솔린 3.5 모델을 운행하더라도 세금 부담이 전혀 없습니다. 승용차 세율이 적용되어 배기량이 클수록 세금이 가파르게 증가하는 7인승 및 9인승 모델들과 비교해 보았을 때 매우 확실한 재정적 장점을 보장합니다. 다만 종합 보험 가입 시에는 승합차 전문 요율이 적용되므로 가입 연령 및 사고 이력에 따라 일반 개인 승용 보험보다 초기 산정 비용이 다소 높게 책정될 수 있다는 점이 단점으로 꼽힙니다.
+      </p>
+    </section>
+
+    <section id="guide-comparison">
+      <h2>자동차리스 vs 장기렌트카 전격 비교 및 장단점</h2>
+      <p>
+        신차 출고에 따른 초기 비용을 최소화하고 매월 발생하는 고정 지출을 합리적으로 통제하려는 경향이 강해짐에 따라 자동차리스와 장기렌트카의 수요는 지속해서 늘어나고 있습니다. 두 계약 방식은 차량 명의의 소유와 번호판 종류, 보험 이력의 연계성 등 다양한 측면에서 명확한 차이점을 나타냅니다.
+      </p>
+
+      <div class="grid-container">
+        <div class="card">
+          <h3>자동차리스 특징 및 권장 대상</h3>
+          <p>
+            자동차리스는 리스 금융사의 명의로 등록된 차량을 임대하여 운행하되 일반 승용차와 동일한 번호판(하, 허, 호 가 아닌 일반 등록 번호판)을 부착하는 장점이 있습니다. 품위 유지와 임대 차량이라는 외부 인식을 꺼려 하시는 개인사업자나 전문 경영인 분들께 높은 추천 우선 순위를 갖습니다.
+          </p>
+          <p>
+            또한 리스 이용 기간 동안 운전자의 개인 자동차 보험 요율이 그대로 승계되므로 무사고 경력이 오래 누적된 운전자의 경우 매월 산출되는 전체 이용 비용을 상대적으로 낮게 설계할 수 있습니다. 단 금융 대출 상품의 범주에 속하기 때문에 개인의 부채 한도 및 신용도 평가에 직접적인 변동을 줄 수 있다는 차이점이 존재하므로 신용 거래 확대를 계획 중인 사업자라면 세심히 파악해 두어야 합니다.
+          </p>
+        </div>
+        <div class="card">
+          <h3>장기렌트카 특징 및 권장 대상</h3>
+          <p>
+            장기렌트카는 렌트 전문 업체에서 차량을 직접 소유하고 이를 장기 임대해 주는 서비스 형태를 취합니다. 가장 큰 장점은 월 이용 금액 내에 자동차세, 정비 비용, 사고 대차 서비스 및 종합 보험료가 일체 포함되어 있다는 점입니다. 따라서 갑작스러운 사고가 발생하더라도 면책금 납부만으로 간단히 처리가 가능하며 보험 할증에 따른 재정적 타격이 전혀 없습니다.
+          </p>
+          <p>
+            차량 대여 제도가 금융 부채로 인식되지 않아 신용 등급이나 추가 대출 한도 설정에 부정적 영향을 일절 끼치지 않습니다. 다만 하, 허, 호 등의 렌트카 전용 번호판을 사용해야 한다는 점과 장기 무사고 경력이 지속되더라도 추후 개인 보험 가입 시 경력이 누적 인정되지 않고 소멸할 수 있다는 점이 장단점으로 나뉩니다.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        따라서 장기 무사고 기간이 길고 일반 번호판 사용을 고수하고자 하는 소비자는 리스 상품을, 사고 부담이 크거나 간편한 자금 관리 및 재무제표 관리를 희망하는 법인 및 자영업자는 장기렌트카를 선택하는 것이 가장 저렴한곳을 선별하는 전문 컨설팅의 기본 골자입니다.
+      </p>
+    </section>
+
+    <section id="guide-models">
+      <h2>카니발 주요 라인업 세부 사양 비교 (30종 모델 리스트)</h2>
+      <p>
+        카니발은 연식과 탑승 인원, 엔진 구성 및 실내 내장 사양 패키지에 따라 매우 폭넓은 라인업을 보유하고 있습니다. 다음은 소비자의 선호도 순위에 오르는 대표적인 세부 모델 사양 가이드입니다.
+      </p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>순번</th>
+              <th>세부 모델명 명칭</th>
+              <th>엔진 사양</th>
+              <th>승차 정원 및 세부 트림</th>
+              <th>주요 특징 요약</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>카니발 11인승 가솔린 3.5 프레스티지</td><td>가솔린 3.5</td><td>11인승 엔트리</td><td>합리적인 초기 시작 금액 책정으로 기본기에 충실한 모델</td>
+            <tr><td>2</td><td>카니발 11인승 가솔린 3.5 노블레스</td><td>가솔린 3.5</td><td>11인승 중간트림</td><td>가장 수요가 많은 필수 편의 사양이 집중적으로 구성된 주력 모델</td>
+            <tr><td>3</td><td>카니발 11인승 가솔린 3.5 시그니처</td><td>가솔린 3.5</td><td>11인승 최상위</td><td>고급 가죽 시트 및 최신 스마트 안전 옵션이 전면 적용된 차량</td>
+            <tr><td>4</td><td>카니발 11인승 디젤 2.2 프레스티지</td><td>디젤 2.2</td><td>11인승 엔트리</td><td>높은 토크와 우수한 연비 효율성을 갖춘 알뜰형 비즈니스 카</td>
+            <tr><td>5</td><td>카니발 11인승 디젤 2.2 노블레스</td><td>디젤 2.2</td><td>11인승 중간트림</td><td>패밀리 운행과 업무용 장거리 출장이 잦은 유저를 위한 추천 차량</td>
+            <tr><td>6</td><td>카니발 11인승 디젤 2.2 시그니처</td><td>디젤 2.2</td><td>11인승 최상위</td><td>중후한 외관 패키지와 첨단 서라운드 뷰 등 최고 편의 사양 탑재</td>
+            <tr><td>7</td><td>카니발 9인승 가솔린 3.5 프레스티지</td><td>가솔린 3.5</td><td>9인승 엔트리</td><td>버스전용차로 진입이 가능한 대중적인 대형 SUV 대체 모델</td>
+            <tr><td>8</td><td>카니발 9인승 가솔린 3.5 노블레스</td><td>가솔린 3.5</td><td>9인승 중간트림</td><td>전자식 다이얼 기어 노브 및 파워 슬라이딩 도어 기본 제공</td>
+            <tr><td>9</td><td>카니발 9인승 가솔린 3.5 시그니처</td><td>가솔린 3.5</td><td>9인승 최상위</td><td>엠비언트 라이트 및 운전자세 메모리 시스템 적용으로 안락함 제공</td>
+            <tr><td>10</td><td>카니발 9인승 가솔린 3.5 그래비티</td><td>가솔린 3.5</td><td>9인승 스페셜</td><td>블랙 라디에이터 그릴 및 차별화된 전용 휠로 스타일을 강조한 트림</td>
+            <tr><td>11</td><td>카니발 9인승 디젤 2.2 프레스티지</td><td>디젤 2.2</td><td>9인승 엔트리</td><td>저속 실용 구간에서 뿜어져 나오는 넉넉한 구동력이 장점</td>
+            <tr><td>12</td><td>카니발 9인승 디젤 2.2 노블레스</td><td>디젤 2.2</td><td>9인승 중간트림</td><td>자녀가 있는 다자녀 가정에서 가장 부담 없이 운영하기 좋은 구성</td>
+            <tr><td>13</td><td>카니발 9인승 디젤 2.2 시그니처</td><td>디젤 2.2</td><td>9인승 최상위</td><td>노이즈 캔슬링 및 첨단 반자율 주행 시스템 대거 보강</td>
+            <tr><td>14</td><td>카니발 9인승 디젤 2.2 그래비티</td><td>디젤 2.2</td><td>9인승 스페셜</td><td>고유의 전용 외관 색상 테마와 메탈 가니쉬 인테리어 탑재</td>
+            <tr><td>15</td><td>카니발 9인승 하이브리드 프레스티지</td><td>하이브리드 1.6T</td><td>9인승 엔트리</td><td>높은 가솔린 하이브리드 연비로 도심 출퇴근에 가장 강한 차량</td>
+            <tr><td>16</td><td>카니발 9인승 하이브리드 노블레스</td><td>하이브리드 1.6T</td><td>9인승 중간트림</td><td>대기 기간이 긴 인기 트림으로 정숙성과 편의 사양의 조화</td>
+            <tr><td>17</td><td>카니발 9인승 하이브리드 시그니처</td><td>하이브리드 1.6T</td><td>9인승 최상위</td><td>최고급 디지털 계기판 및 실내 공기청정 시스템 풀 패키지</td>
+            <tr><td>18</td><td>카니발 9인승 하이브리드 그래비티</td><td>하이브리드 1.6T</td><td>9인승 스페셜</td><td>독보적인 고품격 다크 크롬 디자인 요소를 담아낸 차별적 트림</td>
+            <tr><td>19</td><td>카니발 7인승 가솔린 3.5 노블레스</td><td>가솔린 3.5</td><td>7인승 중간트림</td><td>넓은 레그룸과 프리미엄 릴렉션 시트로 안락한 2열 환경 보장</td>
+            <tr><td>20</td><td>카니발 7인승 가솔린 3.5 시그니처</td><td>가솔린 3.5</td><td>7인승 최상위</td><td>의전용 차량 및 패밀리 아웃도어용 최고의 프리미엄 트림</td>
+            <tr><td>21</td><td>카니발 7인승 가솔린 3.5 그래비티</td><td>가솔린 3.5</td><td>7인승 스페셜</td><td>다크 크롬 사이드 미러 커버 및 세련된 아웃도어 비주얼 구성</td>
+            <tr><td>22</td><td>카니발 7인승 가솔린 3.5 아웃도어</td><td>가솔린 3.5</td><td>7인승 레저전용</td><td>캠핑 및 차박에 최적화된 풀플랫 특화 플랫 시트 배열 탑재</td>
+            <tr><td>23</td><td>카니발 7인승 디젤 2.2 노블레스</td><td>디젤 2.2</td><td>7인승 중간트림</td><td>원거리 패밀리 여행이 잦은 가정을 겨냥한 장거리용 추천 차</td>
+            <tr><td>24</td><td>카니발 7인승 디젤 2.2 시그니처</td><td>디젤 2.2</td><td>7인승 최상위</td><td>스마트 전동식 파워 테일게이트 장착 및 프리미엄 오디오 탑재</td>
+            <tr><td>25</td><td>카니발 7인승 하이브리드 노블레스</td><td>하이브리드 1.6T</td><td>7인승 중간트림</td><td>부드러운 승차감과 압도적인 도심 연비의 환상적인 융합</td>
+            <tr><td>26</td><td>카니발 7인승 하이브리드 시그니처</td><td>하이브리드 1.6T</td><td>7인승 최상위</td><td>리무진급 시트 편안함과 최첨단 주행 편의 사양이 총망라된 차량</td>
+            <tr><td>27</td><td>카니발 7인승 하이브리드 그래비티</td><td>하이브리드 1.6T</td><td>7인승 스페셜</td><td>특별한 외장 세부 포인트로 세련미를 한껏 올린 모델</td>
+            <tr><td>28</td><td>카니발 하이리무진 9인승 가솔린 노블레스</td><td>가솔린 3.5</td><td>하이리무진 기본</td><td>천장 하이루프 구조로 높은 헤드룸 공간감을 자랑하는 하이 클래스</td>
+            <tr><td>29</td><td>카니발 하이리무진 9인승 하이브리드 시그니처</td><td>하이브리드 1.6T</td><td>하이리무진 고급</td><td>연비와 럭셔리 라이프스타일을 완벽히 만족하는 친환경 하이엔드</td>
+            <tr><td>30</td><td>카니발 하이리무진 4인승 가솔린 시그니처</td><td>가솔린 3.5</td><td>하이리무진 비즈니스</td><td>대기업 임원진 및 중요 바이어 의전에 극대화된 최고가 명품 시트 모델</td>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="guide-keywords">
+      <h2>연관 검색 및 함께 많이 찾는 검색어 가이드</h2>
+      <p>
+        신차 출고 단계에서 소비자들이 유심히 서치하는 자동완성 검색어 데이터베이스에는 카니발 11인승 유지비 산정 요령을 비롯하여, 실시간 리스 견적 세무 처리 범위 및 다자녀 혜택 적용 가능 여부에 대한 호기심이 주를 이루고 있습니다.
+      </p>
+      <p>
+        최근 네이버 블로그의 내돈내산 후기나 디시인사이드 차갤 등의 자동차 커뮤니티, 유튜브, 트위터, 인스타그램, 페이스북과 같은 대중적인 소셜 미디어 채널에서 카니발 11인승 유지비와 연관된 생생하고 가감 없는 정보들이 신속하게 전파되고 있습니다. 또한 최근 들어서는 전 세계 구글 크롤러나 고도화된 대화형 인터페이스를 지원하는 구글 제미나이(Gemini), OpenAI의 챗지피티(ChatGPT)를 포함한 인공지능(AI) 플랫폼을 적극적으로 가동하여 다채로운 금융사들의 혜택 및 장기렌트 요율표를 순위 비교한 다음 가장 저렴한곳을 객관적으로 가려내는 스마트 컨슈머들이 급격한 속도로 확장되고 있습니다.
+      </p>
+      <p>
+        신규 가입 및 정식 진행 프로세스 단계에서 여러 딜러사나 에이전트 전문 업체가 선사하는 현금지원 혜택과 블랙박스 시공 등의 다채로운 사은품, 백화점 상품권 증정 프로모션, 정기 이벤트 리스트를 꼼꼼히 대조해 보며 예상 할인 금액의 낙폭을 정밀히 관찰하는 것이 무엇보다 지혜로운 소비를 달성하는 비결입니다.
+      </p>
+    </section>
+
+    <section id="calculator" class="calculator-box">
+      <h2>카니발 11인승 월 예상 납입금 모의 계산기</h2>
+      <p>아래에서 마음에 두신 트림과 상세 가정을 수립하시면 가상의 월 예상 리스렌트 견적 금액을 실시간으로 확인해 볼 수 있습니다.</p>
+      
+      <div class="grid-container">
+        <div class="form-group">
+          <label for="engine">선호 엔진 선택</label>
+          <select id="engine" onchange="calculateQuote()">
+            <option value="gasoline">스마트스트림 가솔린 3.5</option>
+            <option value="diesel">스마트스트림 디젤 2.2</option>
+            <option value="hybrid">스마트스트림 하이브리드 1.6T</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="trim">실내 인테리어 트림</label>
+          <select id="trim" onchange="calculateQuote()">
+            <option value="prestige">프레스티지 사양</option>
+            <option value="noblesse">노블레스 사양</option>
+            <option value="signature">시그니처 사양</option>
+            <option value="gravity">그래비티 스페셜 사양</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="product">금융 계약 타입</label>
+          <select id="product" onchange="calculateQuote()">
+            <option value="rent">장기렌트카 (보험세금 일체형)</option>
+            <option value="lease">자동차리스 (일반번호판 사용)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="period">의무 이용 계약 기간</label>
+          <select id="period" onchange="calculateQuote()">
+            <option value="36">36 개월</option>
+            <option value="48">48 개월</option>
+            <option value="60">60 개월</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="prepayment">초기 보증 비율 / 선납금율</label>
+          <select id="prepayment" onchange="calculateQuote()">
+            <option value="0">무보증 0 퍼센트 조건</option>
+            <option value="10">보증금 또는 선납금 10 퍼센트</option>
+            <option value="20">보증금 또는 선납금 20 퍼센트</option>
+            <option value="30">보증금 또는 선납금 30 퍼센트</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        예상 월 납입금 수준: <span id="calc-result">482000 원</span>
+      </div>
+      <p style="font-size: 0.85rem; color: #64748b; text-align: center; margin-top: 15px;">
+        본 모의 산출 공식은 금융사의 신용 심사 기준 및 시기별 제휴 할인 적용 요율에 따라 오차가 있을 수 있으므로 정밀 견적은 하단의 상담 신청을 권유합니다.
+      </p>
+    </section>
+
+    <section id="quote-form">
+      <h2>카니발 11인승 무료 정밀 견적 신청</h2>
+      <p>
+        제시해 드린 기본 견적 외에 신용 조건별 우대 혜택과 법인 특별 프로모션 적용가가 궁금하시다면 하단 세부 양식을 기재해 주십시오. 전문 상담원이 검토 후 정직한 비교 보고서를 제공합니다.
+      </p>
+
+      <form action="#" method="POST" onsubmit="alert('상담 신청이 완료되었습니다. 담당자가 신속히 연동 전화를 드립니다.'); return false;">
+        <div class="grid-container">
+          <div class="form-group">
+            <label for="userName">신청 고객 성명 또는 법인명</label>
+            <input type="text" id="userName" name="userName" placeholder="예: 홍길동 또는 한국비즈니스스토어" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userPhone">상담 연락처 번호</label>
+            <input type="tel" id="userPhone" name="userPhone" placeholder="예: 010-1234-5678" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userEmail">회신 메일 주소</label>
+            <input type="email" id="userEmail" name="userEmail" placeholder="예: customer@domain.com">
+          </div>
+
+          <div class="form-group">
+            <label for="selectModel">희망 세부 모델</label>
+            <select id="selectModel" name="selectModel">
+              <option>카니발 11인승 가솔린 3.5 노블레스</option>
+              <option>카니발 11인승 가솔린 3.5 시그니처</option>
+              <option>카니발 11인승 디젤 2.2 노블레스</option>
+              <option>카니발 11인승 디젤 2.2 시그니처</option>
+              <option>카니발 9인승 하이브리드 노블레스</option>
+              <option>카니발 9인승 하이브리드 시그니처</option>
+              <option>기타 세부 사양 맞춤 상담 필요</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>관심 있는 프로모션 우대 사항 선택 (중복 체크 가능)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="advantage" value="gift">주유 및 블랙박스 사은품 패키지</label>
+            <label class="checkbox-label"><input type="checkbox" name="advantage" value="cash">특별 추가 현금지원 프로모션</label>
+            <label class="checkbox-label"><input type="checkbox" name="advantage" value="discount">재구매 우대 조건 적용</label>
+            <label class="checkbox-label"><input type="checkbox" name="advantage" value="quick">일주일 이내 즉시출고 희망</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="userMemo">추가 희망 사항 및 문의 메세지</label>
+          <textarea id="userMemo" name="userMemo" rows="4" placeholder="예: 무보증 진행 가능 여부 및 연간 세액공제 금액 산출 한도가 궁금합니다."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">상세 비교 견적 요청서 발송하기</button>
+      </form>
+    </section>
+
+    <div class="link-section">
+      <h3>공인된 자동차 유관 기관 안내 링크</h3>
+      <p>아래에서 소개되는 정부 기관 및 신뢰도 높은 정보 사이트를 통해 신차 구매 전 각종 세제 혜택과 자동차 성능 평가 제도를 더 깊이 조사해 보실 수 있습니다.</p>
+      <a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20%EC%B9%B4%EB%8B%88%EB%B0%9C" target="_blank" rel="noopener">기아 카니발 나무위키 정보</a>
+      <a href="https://www.kia.com" target="_blank" rel="noopener">기아자동차 공식 웹페이지</a>
+      <a href="https://www.nts.go.kr" target="_blank" rel="noopener">국세청 홈택스 세무 정보</a>
+      <a href="https://www.molit.go.kr" target="_blank" rel="noopener">국토교통부 행정 홈페이지</a>
+      <a href="https://www.car365.go.kr" target="_blank" rel="noopener">자동차 365 공공 데이터 포털</a>
+    </div>
+
+  </main>
+
+  <script>
+    function calculateQuote() {
+      const engine = document.getElementById('engine').value;
+      const trim = document.getElementById('trim').value;
+      const product = document.getElementById('product').value;
+      const period = parseInt(document.getElementById('period').value);
+      const prepayment = parseInt(document.getElementById('prepayment').value);
+
+      let baseCost = 34500000;
+
+      if (engine === 'diesel') baseCost += 1900000;
+      if (engine === 'hybrid') baseCost += 4550000;
+
+      if (trim === 'noblesse') baseCost += 4200000;
+      if (trim === 'signature') baseCost += 8100000;
+      if (trim === 'gravity') baseCost += 9600000;
+
+      let residualRate = 0.45;
+      if (period === 48) residualRate = 0.38;
+      if (period === 60) residualRate = 0.32;
+
+      let residualValue = baseCost * residualRate;
+      let targetLoanAmount = baseCost - residualValue - (baseCost * (prepayment / 100));
+      
+      let monthlyBasic = targetLoanAmount / period;
+      let interestRate = 0.052;
+      let monthlyInterest = (targetLoanAmount * interestRate) / 12;
+
+      let rawResult = monthlyBasic + monthlyInterest;
+
+      if (product === 'rent') {
+        rawResult = rawResult * 1.05;
+      } else {
+        rawResult = rawResult * 0.95;
+      }
+
+      let finalResult = Math.round(rawResult);
+      if (finalResult < 350000) finalResult = 350000;
+
+      document.getElementById('calc-result').innerText = finalResult.toLocaleString() + ' 원';
+    }
+
+    window.onload = function() {
+      calculateQuote();
+    };
+  </script>
+  
